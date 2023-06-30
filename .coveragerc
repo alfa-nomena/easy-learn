@@ -1,0 +1,2 @@
+[run]
+omit = easylearn/*, **/conftest.py, **/apps.py, manage.py, **/migrations/*, **/tests/*, **/__init__.py
