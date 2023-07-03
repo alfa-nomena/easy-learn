@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from courses.serializers import CourseSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,9 +16,13 @@ class UserSerializer(serializers.ModelSerializer):
             'is_superuser',
             'date_joined',
             'password',
+            'course_set'
         ]
         extra_kwargs = {
             'password': {
                 'write_only': True
             }
         }
+        depth=1
+        
+        

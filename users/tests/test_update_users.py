@@ -1,5 +1,4 @@
-import pytest 
-from faker import Faker
+import pytest
 from users.models import User
 
 
@@ -25,9 +24,7 @@ def test_update_with_no_data_should_fail(client, url_users, one_user):
     assert response.status_code == 400
 
 @pytest.mark.django_db
-@pytest.mark.now
-def test_update_should_edit_in_the_database(client, url_users, one_user):
-    faker = Faker()
+def test_update_should_edit_in_the_database(client, url_users, one_user, faker):
     while True:
         username = faker.user_name()
         if not User.objects.filter(username=username).exists():
