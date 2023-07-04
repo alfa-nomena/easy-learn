@@ -10,11 +10,11 @@ class Command(BaseCommand):
         for user in tqdm(User.objects.all(), desc='Removing users from DB'):
             user.delete()
     
-    def handle(self, *args: Any, **options: Any) -> str | None:
+    def handle(self, *args, **kwargs) -> str | None:
         self.clean_db()
         faker = Faker()
-        for i in tqdm(range(random.randrange(100, 250)), desc='Creating users'):
-            random_or_none = lambda x : x if random.choice([True, False]) else ''
+        for i in tqdm(range(random.randrange(50, 150)), desc='Creating users'):
+            random_or_none = lambda x : x if bool(random.getrandbits(1)) else ''
             User.objects.create(
                 username=faker.user_name(),
                 password='password',
@@ -22,5 +22,5 @@ class Command(BaseCommand):
                 first_name = random_or_none(faker.first_name()),
                 last_name = random_or_none(faker.last_name()), 
                 is_staff=i<10,
-                is_active=random.choice([True, False])
+                is_active=bool(random.getrandbits(1))
             )
